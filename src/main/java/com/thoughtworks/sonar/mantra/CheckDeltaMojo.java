@@ -1,7 +1,7 @@
 package com.thoughtworks.sonar.mantra;
 
 import com.google.common.base.Joiner;
-import com.thoughtworks.comsonar.mantra.MetricsInfoParser;
+import com.thoughtworks.sonar.mantra.MetricsInfoParser;
 import com.thoughtworks.sonar.mantra.jsondata.MetricsResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

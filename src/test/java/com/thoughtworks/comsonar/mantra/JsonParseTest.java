@@ -2,6 +2,7 @@ package com.thoughtworks.comsonar.mantra;
 
 import com.google.common.collect.Lists;
 import com.thoughtworks.sonar.mantra.MetricMeasures;
+import com.thoughtworks.sonar.mantra.MetricsInfoParser;
 import com.thoughtworks.sonar.mantra.jsondata.MetricsResponse;
 import org.junit.Test;
 
@@ -12,17 +13,6 @@ import static org.junit.Assert.assertEquals;
 public class JsonParseTest {
     @Test
     public void should_parse_json_correctly() {
-//        String toParse = "[\n" +
-//                "{\"cols\":\n" +
-//                "[{\"metric\":\"coverage\"}],\n" +
-//                "\"cells\":\n" +
-//                "[{\"d\":\"2014-11-11T22:37:30+0800\",\"v\":[74.0]},\n" +
-//                "{\"d\":\"2014-11-12T07:22:07+0800\",\"v\":[74.0]},\n" +
-//                "{\"d\":\"2014-11-14T15:42:53+0800\",\"v\":[39.8]},\n" +
-//                "{\"d\":\"2014-11-16T14:27:15+0800\",\"v\":[39.8]}\n" +
-//                "]\n" +
-//                "}\n" +
-//                "]";
         String toParse = "            [{\n" +
                 "        cols: [\n" +
                 "        {\n" +
