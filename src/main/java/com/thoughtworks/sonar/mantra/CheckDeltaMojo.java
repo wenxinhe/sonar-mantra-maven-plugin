@@ -41,6 +41,7 @@ public class CheckDeltaMojo extends AbstractMojo{
             MetricsResponse metricsResponse = metricsInfoParser
                     .getMetricsResponse(new InputStreamReader(content));
             checkMetrics(metricsResponse);
+            System.out.println("Success!!");
         } catch (IOException e) {
             e.printStackTrace();
         }
