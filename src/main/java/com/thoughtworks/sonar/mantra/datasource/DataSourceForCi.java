@@ -2,12 +2,7 @@ package com.thoughtworks.sonar.mantra.datasource;
 
 import com.thoughtworks.sonar.mantra.MetricsInfoParser;
 import com.thoughtworks.sonar.mantra.jsondata.MetricsResponse;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
@@ -19,9 +14,9 @@ import java.util.List;
 public class DataSourceForCi implements DataSource {
     private MetricsResponse metricsResponse;
 
-    public DataSourceForCi(String url) throws IOException {
+    public DataSourceForCi(InputStream inputStream) {
         metricsResponse = new MetricsInfoParser()
-                .getMetricsResponse(new InputStreamReader(getInputStream(url)));
+                .getMetricsResponse(new InputStreamReader(inputStream));
     }
 
     @Override
@@ -38,14 +33,8 @@ public class DataSourceForCi implements DataSource {
                 getHistoryData(metric).subList(1, getHistoryData(metric).size() - 1);
     }
 
-    private InputStream getInputStream(String url) throws IOException {
-        HttpGet httpGet = new HttpGet(url);
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpResponse execute = httpClient.execute(httpGet);
-        return execute.getEntity().getContent();
-    }
-
     private List<Double> getHistoryData(String metric) {
         return metricsResponse.getMetricByName(metric).getHistoryData();
     }
+
 }

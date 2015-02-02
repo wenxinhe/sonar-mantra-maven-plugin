@@ -2,8 +2,8 @@ package com.thoughtworks.sonar.mantra;
 
 import com.google.common.base.Joiner;
 import com.thoughtworks.sonar.mantra.datasource.DataSource;
-import com.thoughtworks.sonar.mantra.datasource.DataSourceFactory;
 import com.thoughtworks.sonar.mantra.datasource.DataSourceForCi;
+import com.thoughtworks.sonar.mantra.datasource.DataSourceUrl;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -28,8 +28,7 @@ public class CheckDeltaMojo extends AbstractMojo {
     private DataSource dataSource;
 
     public CheckDeltaMojo() throws IOException {
-        dataSource = new DataSourceForCi(createUrlForCi());
-        dataSource = DataSourceFactory.createDataSource(false, createUrlForCi(), null);
+        dataSource = createDataSource();
     }
 
     @Override
@@ -51,6 +50,10 @@ public class CheckDeltaMojo extends AbstractMojo {
             metrics.add(mantra.getMetric());
         }
         return queryUrl + Joiner.on(",").join(metrics);
+    }
+
+    private DataSource createDataSource() throws IOException {
+        return new DataSourceForCi(new DataSourceUrl(createUrlForCi()).getInputStream());
     }
 
 }
