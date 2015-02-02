@@ -21,16 +21,18 @@ public class DataSourceForCi implements DataSource {
 
     @Override
     public Double getCurrentValue(String metric) {
-        if (getHistoryData(metric).size() == 0) {
+        List<Double> historyData = getHistoryData(metric);
+        if (historyData.size() == 0) {
             throw new IllegalStateException("historyData size == 0");
         }
-        return getHistoryData(metric).get(0);
+        return historyData.get(0);
     }
 
     @Override
     public List<Double> getHistoryValues(String metric) {
-        return getHistoryData(metric).size() == 1 ? Collections.<Double>emptyList() :
-                getHistoryData(metric).subList(1, getHistoryData(metric).size() - 1);
+        List<Double> historyData = getHistoryData(metric);
+        return historyData.size() == 1 ? Collections.<Double>emptyList() :
+                historyData.subList(1, historyData.size());
     }
 
     private List<Double> getHistoryData(String metric) {

@@ -1,4 +1,4 @@
-package com.thoughtworks.comsonar.mantra;
+package com.thoughtworks.sonar.mantra;
 
 import com.google.common.collect.Lists;
 import com.thoughtworks.sonar.mantra.MetricMeasures;
